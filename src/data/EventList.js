@@ -1,0 +1,52 @@
+export const MainEvent={
+  event_name: "Precision Pathfinders",
+  event_img: "https://placehold.jp/808080/808080/400x300.png",
+  event_venue:"Location",
+  event_time: "2 pm - 5 pm",
+  event_date: "18",
+  event_month: "March",
+  event_register_link: "https://www.google.com",
+}
+
+export const EventList = [
+  {
+    id: 1,
+    event_name: "Event Name",
+    event_img: "https://placehold.jp/808080/808080/400x300.png",
+    event_venue: "City Park",
+    event_time: "10 am - 1 pm",
+    event_date: "15",
+    event_month: "JUN",
+    event_register_link: "https://www.google.com",
+  },
+  {
+    id: 2,
+    event_name: "Event Name",
+    event_img: "https://placehold.jp/808080/808080/400x300.png",
+    event_venue: "Art Gallery Center",
+    event_time: "12 pm - 3 pm",
+    event_date: "20",
+    event_month: "AUG",
+    event_register_link: "https://www.google.com",
+  },
+  {
+    id: 3,
+    event_name: "Event Name",
+    event_img: "https://placehold.jp/808080/808080/400x300.png",
+    event_venue: "Downtown Square",
+    event_time: "4 pm - 9 pm",
+    event_date: "05",
+    event_month: "SEP",
+    event_register_link: "https://www.google.com",
+  },
+  {
+    id: 4,
+    event_name: "Event Name",
+    event_img: "https://placehold.jp/808080/808080/400x300.png",
+    event_venue: "Convention Center",
+    event_time: "9 am - 5 pm",
+    event_date: "10",
+    event_month: "OCT",
+    event_register_link: "https://www.google.com",
+  },
+];
