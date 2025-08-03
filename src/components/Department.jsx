@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import './deptCard.css';
 
@@ -34,13 +35,27 @@ function Departments() {
             }}
             data-text="Design"
         ></div>
-        <div
+        {/* <div
             className="box box-3"
             style={{
                 backgroundImage: "url(assets/members/projects.jpg)"
             }}
+            
             data-text="Projects"
-        ></div>
+        ></div> */}
+
+        <div
+  className="box box-3 cursor-pointer"
+  style={{
+    backgroundImage: "url(assets/members/projects.jpg)"
+  }}
+  data-text="Projects"
+  onClick={() => {
+    document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+</div>
+
         <div
             className="box box-4"
             style={{
