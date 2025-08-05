@@ -3,140 +3,249 @@ import React, { useRef, useEffect, useState } from 'react';
 import { data } from '../constants/member_gallery';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
-const ImageBox = ({ member }) => (
-  <div className="bg-[#000D13] sm:w-96 w-[1 3rem] h-fit border-[#0073AE] border shadow-lg shadow-[#0073AE]">
-    <div className=" flex flex-row sm:gap-7 gap-5">
-      <img src={member.img} className="w-1/3 h-full" />
-      <div className="flex flex-col">
-        <p className='text-white sm:text-3xl text-xl mt-2'>{member.name}</p>
-        <p className='text-[#0073AE] sm:text-2xl text-lg mt-1'>{member.designation}</p>
-        <div className="flex flex-row sm:text-3xl text-xl sm:mt-7 gap-4 mb-2">
-          <button onClick={() => window.location.href = member.instagram}>
-            <i className="fa fa-instagram text-[#0073AE] hover:text-white"></i>
-          </button>
-          <button onClick={() => window.location.href = member.twitter}>
-            <i className="fa fa-twitter text-[#0073AE] hover:text-white"></i>
-          </button>
-          <button onClick={() => window.location.href = member.linkedin}>
-            <i className="fa fa-linkedin text-[#0073AE] hover:text-white"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+import { motion } from 'framer-motion';
+import { AnimatePresence} from 'framer-motion';
+
+
+
+const ImageBox = ({ member }) => {
+  const [isTouched, setIsTouched] = useState(false);
+
+ 
+  const baseAnimation = {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+  };
+
+  const touchAnimation = isTouched
+    ? {
+        scale: 1.05,
+        boxShadow: '0 0 20px #00B4D8',
+      }
+    : {};
+
+  const combinedAnimation = { ...baseAnimation, ...touchAnimation };
+
+  return (
+    <motion.div
+      key={member.name}
+      initial={{ opacity: 0, scale: 0.8, filter: 'blur(4px)' }}
+      animate={combinedAnimation}
+      exit={{ opacity: 0, scale: 1.2, filter: 'blur(4px)' }}
+      transition={{ duration: 0.6, ease: 'easeInOut' }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: '0 0 20px #00B4D8',
+      }}
+      onTouchStart={() => {
+        setIsTouched(true);
+        setTimeout(() => setIsTouched(false), 1000);
+      }}
+      className="group bg-gradient-to-br from-[#001d2e] to-[#000D13] w-full max-w-lg mx-auto p-6 rounded-3xl border border-[#00B4D8] transition-all duration-300 shadow-[0_0_25px_#00B4D855] flex flex-col items-center gap-4 hover:shadow-[0_0_35px_#00B4D8aa]"
+    >
+      <motion.img
+        src={member.img}
+        alt={member.name}
+        className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-[#0073AE] object-cover shadow-lg group-hover:rotate-[3deg] transition-transform duration-300"
+      />
+      <motion.div className="text-center">
+        <motion.h2
+          className="text-white text-3xl font-bold"
+          whileHover={{ opacity: 1, y: -2 }}
+          animate={isTouched ? { opacity: 1, y: -2 } : {}}
+          transition={{ duration: 0.3 }}
+        >
+          {member.name}
+        </motion.h2>
+        <motion.p
+          className="text-[#00B4D8] text-xl"
+          whileHover={{ opacity: 1, y: 2 }}
+          animate={isTouched ? { opacity: 1, y: 2 } : {}}
+          transition={{ duration: 0.3 }}
+        >
+          {member.designation}
+        </motion.p>
+      </motion.div>
+      <motion.div
+        className="flex gap-6 text-2xl mt-4"
+        whileHover={{ scale: 1.1 }}
+        animate={isTouched ? { scale: 1.1 } : {}}
+        transition={{ duration: 0.3 }}
+      >
+        {member.instagram && (
+          <a
+            href={member.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0073AE] hover:text-white transition-all duration-300"
+          >
+            <i className="fa fa-instagram" />
+          </a>
+        )}
+        {member.twitter && (
+          <a
+            href={member.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0073AE] hover:text-white transition-all duration-300"
+          >
+            <i className="fa fa-twitter" />
+          </a>
+        )}
+        {member.linkedin && (
+          <a
+            href={member.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0073AE] hover:text-white transition-all duration-300"
+          >
+            <i className="fa fa-linkedin" />
+          </a>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+};
+
+
 
 const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const visibleCount = 4;
+  const totalPages = Math.ceil(data.length / visibleCount);
 
-  const [increment, setIncrement] = useState(0);
-
+  
   useEffect(() => {
-    const updateIncrement = () => {
-      setIncrement(window.innerWidth > 425 ? 4 : 2);
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + visibleCount) % data.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  
+  const containerRef = useRef(null);
+  useEffect(() => {
+    const handleWheel = () => {
+      if (e.deltaY > 0) {
+        setCurrentIndex((prev) => (prev + visibleCount) % data.length);
+      } else {
+        setCurrentIndex((prev) =>
+          (prev - visibleCount + data.length) % data.length
+        );
+      }
     };
-
-    // Set initial increment value
-    updateIncrement();
-
-    // Event listener to update increment value on window resize
-    window.addEventListener('resize', updateIncrement);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', updateIncrement);
-    };
+    const node = containerRef.current;
+    if (node) node.addEventListener("wheel", handleWheel);
+    return () => node?.removeEventListener("wheel", handleWheel);
   }, []);
 
-  const [style,setstyle] = useState("");
-
+  
   useEffect(() => {
-    const handleResize = () => {
-      setIncrement(window.innerWidth > 425 ? 4 : 2);
-    };
+  let startX = 0;
+  let endX = 0;
 
-    window.addEventListener('resize', handleResize);
+  const handleTouchStart = (e) => {
+    startX = e.touches[0].clientX;
+  };
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const handleTouchMove = (e) => {
+    endX = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (endX < startX - 50) {
+      setCurrentIndex((prev) => (prev + visibleCount) % data.length);
+    } else if (endX > startX + 50) {
+      setCurrentIndex((prev) =>
+        (prev - visibleCount + data.length) % data.length
+      );
+    }
+  };
+
+  const node = containerRef.current;
+  if (node) {
+    node.addEventListener("touchstart", handleTouchStart, { passive: true });
+    node.addEventListener("touchmove", handleTouchMove, { passive: true });
+    node.addEventListener("touchend", handleTouchEnd, { passive: true });
+  }
+
+  return () => {
+    if (node) {
+      node.removeEventListener("touchstart", handleTouchStart);
+      node.removeEventListener("touchmove", handleTouchMove);
+      node.removeEventListener("touchend", handleTouchEnd);
+    }
+  };
+}, []);
+
+
+
   
-  const handleNext = () => {
-    const zeroClass = 'transform -translate-x-[200%] duration-500 opacity-0';
-    const initialClass = 'transform translate-x-[200%] duration-0 opacity-0';
-    const finalClass = 'transform translate-x-0 transition-transform duration-500 ease-in-out';
+  const visibleMembers = [];
+  for (let i = 0; i < visibleCount; i++) {
+    visibleMembers.push(data[(currentIndex + i) % data.length]);
+  }
 
-  setstyle(zeroClass); // Apply initial class for the sliding animation
-
-  setTimeout(() => {
-    setstyle(initialClass);
-  }, 100); 
-
-  setCurrentIndex((prevIndex) => {
-    const newIndex = prevIndex + increment;
-    return newIndex >= data.length ? newIndex % data.length : newIndex;
-  });
-
-  // Apply final class after a small delay to initiate the transition
-  setTimeout(() => {
-    setstyle(finalClass);
-  }, 200); // Adjust the delay as needed to ensure the transition occurs smoothly
-};
   
-  const handlePrev = () => {
-    const zeroClass = 'transform translate-x-[200%] duration-500 opacity-0';
-    const initialClass = 'transform -translate-x-[200%] duration-0 opacity-0';
-    const finalClass = 'transform translate-x-0 transition-transform duration-500 ease-in-out';
-
-    setstyle(zeroClass); // Apply initial class for the sliding animation
-
-    setTimeout(() => {
-      setstyle(initialClass);
-    }, 100); 
-  
-    setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex - increment;
-      return newIndex < 0 ? data.length-1 : newIndex;
+  const renderDots = () =>
+    Array.from({ length: totalPages }, (_, i) => {
+      const isActive = currentIndex / visibleCount === i;
+      return (
+        <button
+          key={i}
+          onClick={() => setCurrentIndex(i * visibleCount)}
+          className={`h-3 w-3 mx-1 rounded-full ${
+            isActive ? 'bg-[#00B4D8]' : 'bg-gray-500'
+          }`}
+        />
+      );
     });
 
-     // Apply final class after a small delay to initiate the transition
-  setTimeout(() => {
-    setstyle(finalClass);
-  }, 200); // Adjust the delay as needed to ensure the transition occurs smoothly
+  return (
+    
+    <div
+      ref={containerRef}
+      className="relative w-full max-w-7xl mx-auto px-4 h-auto flex flex-col items-center justify-center gap-6"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full"
+        >
+          {visibleMembers.map((member) => (
+            <ImageBox key={member.name} member={member} />
+          ))}
+        </motion.div>
+      </AnimatePresence>
+
+      
+     <div className="flex justify-center mt-8 gap-3">
+  {Array.from({ length: Math.ceil(data.length / visibleCount) }).map((_, idx) => (
+    <button
+      key={idx}
+      onClick={() => setCurrentIndex(idx * visibleCount)}
+      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+        currentIndex === idx * visibleCount
+          ? 'bg-[#0073AE] scale-110 shadow-md'
+          : 'bg-gray-500 hover:bg-[#0073AE]'
+      }`}
+    />
+  ))}
+</div>
+    </div>
+  );
 };
 
-  return (
-    <div className="flex flex-row justify-around sm:gap-7 gap-4 m-auto">
-      <button
-        onClick={handlePrev}
-        className=" animate-pulse hover:animate-none bg-transparent text-[#0073AE] hover:text-white font-extrabold rounded-[50%] border border-[#0073AE] sm:h-1/2 h-1/3 w-auto sm:text-6xl text-3xl text-center sm:mt-36 mt-24"
-      >
-        <MdChevronLeft />
-      </button>
-      <div className={`hidden sm:flex sm:flex-col gap-4 ${style}`}>
-        <div className='flex flex-row gap-4'>
-          <ImageBox member={data[currentIndex]} /> 
-          <ImageBox member={data[(currentIndex + 1) % data.length]} />
-        </div>
-        <div className=' flex flex-row gap-4'>
-          <ImageBox member={data[(currentIndex + 2) % data.length]} /> 
-          <ImageBox member={data[(currentIndex + 3) % data.length]} />
-        </div>
-      </div>
-      <div className={`flex flex-col gap-2 sm:hidden ${style}`}>
-        <ImageBox member={data[currentIndex]} /> 
-        <ImageBox member={data[(currentIndex + 1) % data.length]} />
-      </div>
-      <button
-        onClick={handleNext}
-        className="  animate-pulse hover:animate-none bg-transparent text-[#0073AE] hover:text-white font-extrabold rounded-[50%] border border-[#0073AE] sm:h-1/2 h-1/3 w-auto sm:text-6xl text-3xl text-center sm:mt-36 mt-24"
-      >
-        <MdChevronRight />
-      </button>
-    </div>
-  )
-}
+
 
 const Members = () => {
   return (
