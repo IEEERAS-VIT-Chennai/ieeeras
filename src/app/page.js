@@ -21,7 +21,6 @@ export default function Home() {
     <Departments />
     <Members />
     <Projects/>
-    <Events/>
     <Footer/>
     </>
   )
