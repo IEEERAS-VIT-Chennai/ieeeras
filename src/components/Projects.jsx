@@ -30,35 +30,48 @@ const Projects = () => {
     },
   ];
 
-//   return (
-//     <div id="Projects" className="text-white sm:m-3 md:m-10 hover:text-white">
-//       <div className="text-4xl sm:text-5xl lg:text-7xl ml-[8%]">
-//         <span className="text-white underline-offset-2 " >Projects </span>
-//       </div>
-//       <hr className="ml-[8%] w-[19%] md:w-[14%] lg:w-[16%] xl:w-[11%] mt-5 h-1 rounded-lg border-0 bg-[#0073AE] mb-[5%]" />
-//       <Carousel slides={proj} />
-//     </div>
-//   );
-// };
+  //   return (
+  //     <div id="Projects" className="text-white sm:m-3 md:m-10 hover:text-white">
+  //       <div className="text-4xl sm:text-5xl lg:text-7xl ml-[8%]">
+  //         <span className="text-white underline-offset-2 " >Projects </span>
+  //       </div>
+  //       <hr className="ml-[8%] w-[19%] md:w-[14%] lg:w-[16%] xl:w-[11%] mt-5 h-1 rounded-lg border-0 bg-[#0073AE] mb-[5%]" />
+  //       <Carousel slides={proj} />
+  //     </div>
+  //   );
+  // };
 
-  return (<motion.div
+  return (
+    <motion.div
       id="Projects"
-      className="text-white sm:m-3 md:m-10 hover:text-white relative"
+      className="text-white relative px-4 sm:px-6 md:px-8 lg:px-10 py-10 lg:py-16 min-h-screen"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
       viewport={{ once: true }}
     >
-      
-      <div className="absolute -top-20 -left-20 w-[300px] h-[300px] bg-gradient-to-br from-[#0073AE] to-[#00ffc3] rounded-full blur-3xl opacity-30 z-0"></div>
+      {/* Background glow effect - responsive positioning */}
+      <div className="absolute -top-10 sm:-top-16 md:-top-20 -left-10 sm:-left-16 md:-left-20 w-[200px] sm:w-[250px] md:w-[300px] h-[200px] sm:h-[250px] md:h-[300px] bg-gradient-to-br from-[#0073AE] to-[#00ffc3] rounded-full blur-3xl opacity-30 z-0"></div>
 
-      <div className="text-4xl sm:text-5xl lg:text-7xl ml-[8%]">
-        <span className="text-white underline-offset-2 inline-block cursor-pointer transition duration-300 hover:scale-110 hover:text-white hover:drop-shadow-[0_0_20px_#00ffc3] group ">Projects</span>
+      {/* Header section with better responsive margins */}
+      <div className="relative z-10 mb-8 sm:mb-10 md:mb-12">
+        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl ml-[4%] sm:ml-[6%] md:ml-[8%]">
+          <span className="text-white underline-offset-2 inline-block cursor-pointer transition duration-300 hover:scale-110 hover:text-white hover:drop-shadow-[0_0_20px_#00ffc3] group">
+            Projects
+          </span>
+        </div>
+
+        {/* Responsive horizontal rule */}
+        <hr className="ml-[4%] sm:ml-[6%] md:ml-[8%] w-[25%] sm:w-[20%] md:w-[16%] lg:w-[14%] xl:w-[11%] mt-3 sm:mt-4 md:mt-5 h-1 rounded-lg border-0 bg-[#0073AE] z-10 relative" />
       </div>
 
-      <hr className="ml-[8%] w-[19%] md:w-[14%] lg:w-[16%] xl:w-[11%] mt-5 h-1 rounded-lg border-0 bg-[#0073AE] mb-[5%] z-10 relative" />
+      {/* Carousel container with responsive padding */}
+      <div className="relative z-10 px-2 sm:px-4 md:px-6">
+        <Carousel slides={proj} />
+      </div>
 
-      <Carousel slides={proj} />
+      {/* Additional decorative background elements for larger screens */}
+      <div className="hidden lg:block absolute right-[10%] top-[60%] w-[8%] h-40 bg-gradient-to-r from-[#0073AE] to-[#00ffc3] filter blur-[120px] rounded-full opacity-20 z-0"></div>
     </motion.div>
   );
 };
