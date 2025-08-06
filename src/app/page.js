@@ -240,7 +240,12 @@ export default function HomePage() {
       {/* Main Content - Renders above sparkles, below the navbar */}
       {showContent && (
         <div className="main-content relative z-10">
+          <section
+            id="homepage"
+            ref={(el) => (sectionRefs.current.about = el)}
+          >
           <Hero />
+          </section>
 
           {/* About Us Section */}
           <section
