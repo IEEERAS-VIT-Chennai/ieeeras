@@ -18,15 +18,14 @@ const Footer = () => {
       </div>
       <div className="md:ml-4 mt-4 md:mt-0">
         <h1 className="text-white">Contact Us</h1>
-        <p className="text-gray-300">Email: ieeeras@example.com</p>
-        <p className="text-gray-300">Phone: 123456789</p>
+        <p className="text-gray-300">Instagram: <a href="https://www.instagram.com/ieeerasvitc" target="_blank" rel="noopener noreferrer" className="hover:text-white no-underline">ieeerasvitc</a></p>
+        <p className="text-gray-300">Linkedin: <a href="https://www.linkedin.com/company/ieeerasvitc/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="hover:text-white no-underline">ieeerasvitc</a></p>
       </div>
       <div className="md:ml-4 mt-4 md:mt-0 flex flex-col md:text-left">
         <a href="#About" className="text-gray-300 hover:text-white">About</a>
         <a href="#Departments" className="text-gray-300 hover:text-white">Departments</a>
         <a href="#Team" className="text-gray-300 hover:text-white">Team</a>
         <a href="#Projects" className="text-gray-300 hover:text-white">Projects</a>
-        <a href="#Events" className="text-gray-300 hover:text-white">Events</a>
       </div>
     </footer>
   );

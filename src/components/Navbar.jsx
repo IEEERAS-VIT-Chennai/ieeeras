@@ -21,7 +21,7 @@ const Navbar = ({ onOpenMobileMenu, activeSection }) => {
     { label: "Home", icon: <Home size={18} />, onClick: () => scrollToSection("home") },
     { label: "About Us", icon: <Users size={18} />, onClick: () => scrollToSection("about") },
     { label: "Department", icon: <Briefcase size={18} />, onClick: () => scrollToSection("department") },
-    { label: "Members", icon: <Layers size={18} />, onClick: () => scrollToSection("members") },
+    { label: "Team", icon: <Layers size={18} />, onClick: () => scrollToSection("members") },
     { label: "Projects", icon: <Folder size={18} />, onClick: () => scrollToSection("projects") },
     { label: "Join Us", icon: <MoveRight size={18} />, onClick: () => window.open("https://linktr.ee/IEEERAS_VITC", "_blank") },
   ]

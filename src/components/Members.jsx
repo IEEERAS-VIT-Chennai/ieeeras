@@ -203,12 +203,12 @@ const Slider = () => {
       </AnimatePresence>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center mt-8 gap-4 p-4">
+      <div className="flex justify-center mt-3 gap-4 p-4">
         {teams.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentTeamIndex(idx)}
-            className={`lg:w-5 lg:h-5 rounded-full transition-all duration-300 ${currentTeamIndex === idx
+            className={`lg:w-3 lg:h-3 rounded-full transition-all duration-300 ${currentTeamIndex === idx
                 ? 'bg-[#0073AE] scale-110 shadow-md'
                 : 'bg-gray-500 hover:bg-[#0073AE]'
               }`}

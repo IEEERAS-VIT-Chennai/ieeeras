@@ -13,6 +13,7 @@ import Projects from "@/components/Projects"
 import Footer from "@/components/Footer"
 import HamburgerMenuOverlay from "@/components/lightswind/HamburgerMenuOverlay"
 import { Home, Users, Briefcase, Calendar, Layers, Folder, MoveRight } from "lucide-react"
+import { InfiniteMarquee } from "@/components/ui/InfiniteMarquee"
 
 export default function HomePage() {
   const [loadingProgress, setLoadingProgress] = useState(0)
@@ -148,34 +149,48 @@ export default function HomePage() {
 
   // Menu items configuration for both Navbar and HamburgerMenuOverlay
   const menuItems = [
-    { label: "HomePage", icon: <Home size={18} />, onClick: () => {
-      document.getElementById("homepage")?.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }},
-    { label: "About Us", icon: <Users size={18} />, onClick: () => {
-      document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }},
-    { label: "Department", icon: <Briefcase size={18} />, onClick: () => {
-      document.getElementById("department")?.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }},
-    { label: "Events", icon: <Calendar size={18} />, onClick: () => {
-      document.getElementById("events")?.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }},
-    { label: "Members", icon: <Layers size={18} />, onClick: () => {
-      document.getElementById("members")?.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }},
-    { label: "Projects", icon: <Folder size={18} />, onClick: () => {
-      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }},
-    { label: "Join Us", icon: <MoveRight size={18} />, onClick: () => {
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }},
+    {
+      label: "HomePage", icon: <Home size={18} />, onClick: () => {
+        document.getElementById("homepage")?.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    },
+    {
+      label: "About Us", icon: <Users size={18} />, onClick: () => {
+        document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    },
+    {
+      label: "Department", icon: <Briefcase size={18} />, onClick: () => {
+        document.getElementById("department")?.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    },
+    {
+      label: "Events", icon: <Calendar size={18} />, onClick: () => {
+        document.getElementById("events")?.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    },
+    {
+      label: "Members", icon: <Layers size={18} />, onClick: () => {
+        document.getElementById("members")?.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    },
+    {
+      label: "Projects", icon: <Folder size={18} />, onClick: () => {
+        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    },
+    {
+      label: "Join Us", icon: <MoveRight size={18} />, onClick: () => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    },
   ]
 
   return (
@@ -244,7 +259,21 @@ export default function HomePage() {
             id="homepage"
             ref={(el) => (sectionRefs.current.about = el)}
           >
-          <Hero />
+            <Hero />
+          </section>
+
+          {/* Marquee text here */}
+          <section className="w-full py-8">
+            <InfiniteMarquee
+              content="Recruitments Open — Click to Register &nbsp; &nbsp; ✦"
+              className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 py-4 shadow-lg"
+              textClassName="text-2xl md:text-3xl font-bold text-white tracking-wide"
+              speed={5}
+              pauseOnHover={true}
+              direction="left"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdW-oP3x_hslT_lb-15uvhzOoLWsFnXVkBEQDQyAJhXfey63Q/viewform"
+              target="_blank"
+            />
           </section>
 
           {/* About Us Section */}
@@ -259,11 +288,11 @@ export default function HomePage() {
           <section
             id="department"
             ref={(el) => (sectionRefs.current.department = el)}
-          
+
           >
             <Department />
           </section>
-   
+
 
           {/* Members Section */}
           <section

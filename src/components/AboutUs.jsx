@@ -32,8 +32,8 @@ function RobotModel() {
  useFrame(({ mouse }) => {
   if (group.current) {
    // Combine mouse movement with a slight hover effect
-   group.current.rotation.y = mouse.x * 0.3 + Math.PI; // Corrected direction and mouse control
-   group.current.rotation.x = mouse.y * 0.1 - 0.1; // Keep a slight upward tilt
+   group.current.rotation.y = mouse.x * 0.4 + Math.PI; // Corrected direction and mouse control
+   group.current.rotation.x = -mouse.y * 0.2 - 0.15; // Keep a slight upward tilt
    // Add a subtle hover animation
    group.current.position.y = Math.sin(Date.now() * 0.001) * 0.1;
   }
