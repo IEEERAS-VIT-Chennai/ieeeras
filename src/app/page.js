@@ -246,7 +246,6 @@ export default function HomePage() {
           <section
             id="about"
             ref={(el) => (sectionRefs.current.about = el)}
-            className="relative w-full min-h-screen flex flex-col items-center justify-center text-white py-20"
           >
             <Aboutus />
           </section>
@@ -255,25 +254,16 @@ export default function HomePage() {
           <section
             id="department"
             ref={(el) => (sectionRefs.current.department = el)}
-            className="relative w-full min-h-screen flex flex-col items-center justify-center text-white py-20"
+          
           >
             <Department />
           </section>
-
-          {/* Events Section */}
-          <section
-            id="events"
-            ref={(el) => (sectionRefs.current.events = el)}
-            className="relative w-full min-h-screen flex flex-col items-center justify-center text-white py-20"
-          >
-            <Events />
-          </section>
+   
 
           {/* Members Section */}
           <section
             id="members"
             ref={(el) => (sectionRefs.current.members = el)}
-            className="relative w-full min-h-screen flex flex-col items-center justify-center text-white py-20"
           >
             <Members />
           </section>
@@ -282,25 +272,8 @@ export default function HomePage() {
           <section
             id="projects"
             ref={(el) => (sectionRefs.current.projects = el)}
-            className="relative w-full min-h-screen flex flex-col items-center justify-center text-white py-20"
           >
             <Projects />
-          </section>
-
-          {/* Contact Section */}
-          <section
-            id="contact"
-            ref={(el) => (sectionRefs.current.contact = el)}
-            className="relative w-full min-h-screen flex flex-col items-center justify-center text-white py-20"
-          >
-            <div className="relative text-center z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent">
-                Contact Us
-              </h2>
-              <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Get in touch with us for collaborations and inquiries.
-              </p>
-            </div>
           </section>
 
           <Footer />
