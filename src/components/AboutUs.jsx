@@ -136,14 +136,7 @@ export default function AboutUs() {
  }, [introCompleted]);
 
  return (
-  <div ref={sectionRef} className="relative w-screen h-screen">
-   {/* Background Lights */}
-   <div className="absolute left-[5%] top-0 w-80 h-80 -mt-60 bg-gradient-to-r from-[#F4C4F3] to-[#FC67FA] filter blur-[150px] rounded-full" />
-   <div className="absolute left-[20%] top-0 w-80 h-80 -mt-60 bg-gradient-to-r from-[#1A2980] to-[#26D0CE] filter blur-[150px] rounded-full" />
-   <div className="absolute left-[0%] -ml-40 bottom-10 w-40 h-40 bg-white filter blur-[190px]" />
-   <div className="absolute right-[10%] w-40 h-40 bg-gradient-to-r from-[#F4C4F3] to-[#FC67FA] filter blur-[180px] rounded-full" />
-   <div className="absolute right-[10%] w-40 h-40 bg-white filter blur-[200px]" />
-   <div className="absolute left-[20%] top-0 w-50 h-80 -mt-60 bg-white filter blur-[90px]" />
+  <div ref={sectionRef} className="relative w-screen h-screen overflow-hidden ">
 
    {/* 3D Robot Model */}
    <motion.div
