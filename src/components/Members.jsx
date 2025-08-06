@@ -127,18 +127,6 @@ const Slider = () => {
   }, [isHovered, totalTeams]);
 
   const containerRef = useRef(null);
-  useEffect(() => {
-    const handleWheel = (e) => {
-      if (e.deltaY > 0) {
-        setCurrentTeamIndex((prev) => (prev + 1) % totalTeams);
-      } else {
-        setCurrentTeamIndex((prev) => (prev - 1 + totalTeams) % totalTeams);
-      }
-    };
-    const node = containerRef.current;
-    if (node) node.addEventListener("wheel", handleWheel);
-    return () => node?.removeEventListener("wheel", handleWheel);
-  }, [totalTeams]);
 
   useEffect(() => {
     let startX = 0;
@@ -242,7 +230,7 @@ const Members = () => {
       {/* Header section with responsive margins and animations */}
       <div className="relative z-10 mb-6 sm:mb-8 md:mb-10 mt-11">
         <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl ml-[4%] sm:ml-[6%] md:ml-[8%] lg:ml-[10%]">
-          <span className="text-white underline-offset-2 inline-block cursor-pointer transition duration-300 hover:scale-110 hover:text-white hover:drop-shadow-[0_0_20px_#00ffc3] group">Meet the </span>
+          <span className="text-white underline-offset-2 inline-block cursor-pointer transition duration-300 hover:scale-110 hover:text-white hover:drop-shadow-[0_0_20px_#00ffc3] group">Meet the    </span>
           <span className="text-[#0073AE] inline-block cursor-pointer transition duration-300 hover:scale-110 hover:text-[#00ffc3] hover:drop-shadow-[0_0_20px_#0073AE] group">Team</span>
           <span className="text-white">.</span>
         </div>
