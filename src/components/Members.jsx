@@ -1,17 +1,17 @@
 'use client'
 import React, { useRef, useEffect, useState } from 'react';
-import { data } from '../constants/member_gallery';
+import { teamData } from '../constants/member_gallery';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 import { motion } from 'framer-motion';
-import { AnimatePresence} from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 
 
 const ImageBox = ({ member }) => {
   const [isTouched, setIsTouched] = useState(false);
 
- 
+
   const baseAnimation = {
     opacity: 1,
     scale: 1,
@@ -20,9 +20,9 @@ const ImageBox = ({ member }) => {
 
   const touchAnimation = isTouched
     ? {
-        scale: 1.05,
-        boxShadow: '0 0 20px #00B4D8',
-      }
+      scale: 1.05,
+      boxShadow: '0 0 20px #00B4D8',
+    }
     : {};
 
   const combinedAnimation = { ...baseAnimation, ...touchAnimation };
@@ -83,16 +83,7 @@ const ImageBox = ({ member }) => {
             <i className="fa fa-instagram" />
           </a>
         )}
-        {member.twitter && (
-          <a
-            href={member.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#0073AE] hover:text-white transition-all duration-300"
-          >
-            <i className="fa fa-twitter" />
-          </a>
-        )}
+
         {member.linkedin && (
           <a
             href={member.linkedin}
@@ -111,136 +102,133 @@ const ImageBox = ({ member }) => {
 
 
 const Slider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentTeamIndex, setCurrentTeamIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const visibleCount = 4;
-  const totalPages = Math.ceil(data.length / visibleCount);
 
-  
+  // Convert teamData to array for easier iteration
+  const teams = Object.values(teamData);
+  const totalTeams = teams.length;
+  const currentTeam = teams[currentTeamIndex];
+
+  // Get responsive grid classes based on team size
+  const getGridClasses = (teamSize) => {
+    if (teamSize === 1) return "grid grid-cols-1 gap-6 w-full justify-items-center";
+    if (teamSize === 2) return "grid grid-cols-1 sm:grid-cols-2 gap-6 w-full";
+    if (teamSize === 3) return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full";
+    return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full";
+  };
+
   useEffect(() => {
     if (isHovered) return;
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + visibleCount) % data.length);
+      setCurrentTeamIndex((prevIndex) => (prevIndex + 1) % totalTeams);
     }, 4000);
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, totalTeams]);
 
-  
   const containerRef = useRef(null);
   useEffect(() => {
-    const handleWheel = () => {
+    const handleWheel = (e) => {
       if (e.deltaY > 0) {
-        setCurrentIndex((prev) => (prev + visibleCount) % data.length);
+        setCurrentTeamIndex((prev) => (prev + 1) % totalTeams);
       } else {
-        setCurrentIndex((prev) =>
-          (prev - visibleCount + data.length) % data.length
-        );
+        setCurrentTeamIndex((prev) => (prev - 1 + totalTeams) % totalTeams);
       }
     };
     const node = containerRef.current;
     if (node) node.addEventListener("wheel", handleWheel);
     return () => node?.removeEventListener("wheel", handleWheel);
-  }, []);
+  }, [totalTeams]);
 
-  
   useEffect(() => {
-  let startX = 0;
-  let endX = 0;
+    let startX = 0;
+    let endX = 0;
 
-  const handleTouchStart = (e) => {
-    startX = e.touches[0].clientX;
-  };
+    const handleTouchStart = (e) => {
+      startX = e.touches[0].clientX;
+    };
 
-  const handleTouchMove = (e) => {
-    endX = e.touches[0].clientX;
-  };
+    const handleTouchMove = (e) => {
+      endX = e.touches[0].clientX;
+    };
 
-  const handleTouchEnd = () => {
-    if (endX < startX - 50) {
-      setCurrentIndex((prev) => (prev + visibleCount) % data.length);
-    } else if (endX > startX + 50) {
-      setCurrentIndex((prev) =>
-        (prev - visibleCount + data.length) % data.length
-      );
-    }
-  };
+    const handleTouchEnd = () => {
+      if (endX < startX - 50) {
+        setCurrentTeamIndex((prev) => (prev + 1) % totalTeams);
+      } else if (endX > startX + 50) {
+        setCurrentTeamIndex((prev) => (prev - 1 + totalTeams) % totalTeams);
+      }
+    };
 
-  const node = containerRef.current;
-  if (node) {
-    node.addEventListener("touchstart", handleTouchStart, { passive: true });
-    node.addEventListener("touchmove", handleTouchMove, { passive: true });
-    node.addEventListener("touchend", handleTouchEnd, { passive: true });
-  }
-
-  return () => {
+    const node = containerRef.current;
     if (node) {
-      node.removeEventListener("touchstart", handleTouchStart);
-      node.removeEventListener("touchmove", handleTouchMove);
-      node.removeEventListener("touchend", handleTouchEnd);
+      node.addEventListener("touchstart", handleTouchStart, { passive: true });
+      node.addEventListener("touchmove", handleTouchMove, { passive: true });
+      node.addEventListener("touchend", handleTouchEnd, { passive: true });
     }
-  };
-}, []);
 
-
-
-  
-  const visibleMembers = [];
-  for (let i = 0; i < visibleCount; i++) {
-    visibleMembers.push(data[(currentIndex + i) % data.length]);
-  }
-
-  
-  const renderDots = () =>
-    Array.from({ length: totalPages }, (_, i) => {
-      const isActive = currentIndex / visibleCount === i;
-      return (
-        <button
-          key={i}
-          onClick={() => setCurrentIndex(i * visibleCount)}
-          className={`h-3 w-3 mx-1 rounded-full ${
-            isActive ? 'bg-[#00B4D8]' : 'bg-gray-500'
-          }`}
-        />
-      );
-    });
+    return () => {
+      if (node) {
+        node.removeEventListener("touchstart", handleTouchStart);
+        node.removeEventListener("touchmove", handleTouchMove);
+        node.removeEventListener("touchend", handleTouchEnd);
+      }
+    };
+  }, [totalTeams]);
 
   return (
-    
     <div
       ref={containerRef}
       className="relative w-full max-w-7xl mx-auto px-4 h-auto flex flex-col items-center justify-center gap-6"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Team Name Header */}
+      <motion.div
+        key={`header-${currentTeamIndex}`}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-4"
+      >
+        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0073AE] mb-2">
+          {currentTeam.teamName}
+        </h3>
+        <div className="w-24 h-1 bg-gradient-to-r from-[#0073AE] to-[#00ffc3] mx-auto rounded-full"></div>
+      </motion.div>
+
+      {/* Team Members Grid */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={currentIndex}
+          key={currentTeamIndex}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full"
+          className={getGridClasses(currentTeam.members.length)}
         >
-          {visibleMembers.map((member) => (
-            <ImageBox key={member.name} member={member} />
+          {currentTeam.members.map((member) => (
+            <ImageBox key={member.id} member={member} />
           ))}
         </motion.div>
       </AnimatePresence>
 
+      {/* Navigation Dots */}
+      <div className="flex justify-center mt-8 gap-4 p-4">
+        {teams.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentTeamIndex(idx)}
+            className={`lg:w-5 lg:h-5 rounded-full transition-all duration-300 ${currentTeamIndex === idx
+                ? 'bg-[#0073AE] scale-110 shadow-md'
+                : 'bg-gray-500 hover:bg-[#0073AE]'
+              }`}
+          />
+        ))}
+      </div>
+
       
-     <div className="flex justify-center mt-8 gap-3">
-  {Array.from({ length: Math.ceil(data.length / visibleCount) }).map((_, idx) => (
-    <button
-      key={idx}
-      onClick={() => setCurrentIndex(idx * visibleCount)}
-      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-        currentIndex === idx * visibleCount
-          ? 'bg-[#0073AE] scale-110 shadow-md'
-          : 'bg-gray-500 hover:bg-[#0073AE]'
-      }`}
-    />
-  ))}
-</div>
     </div>
   );
 };
@@ -249,17 +237,20 @@ const Slider = () => {
 
 const Members = () => {
   return (
-    <div id="Team" className="py-20 lg:py-0 lg:h-screen overflow-y-hidden ">
-      <div className="absolute left-[15%] top-[340%] w-[30%] h-60 -mt-60 bg-gradient-to-r from-[#1A2980] to-[#26D0CE] filter blur-[250px] rounded-full transform rotate-90"></div>
-      <div className="absolute left-[15%] top-[340%] w-[10%] h-60 -mt-60 bg-gradient-to-r from-[#F4C4F3] to-[#FC67FA] filter blur-[150px] rounded-full transform rotate-90"></div>
+    <div id="Team" className="py-20 lg:py-0 lg:h-screen overflow-y-hidden relative">
 
-      <div className="text-4xl sm:text-5xl lg:text-7xl ml-[10%]">
-        <span className="text-white underline-offset-2">Meet the </span>
-        <span className="text-[#0073AE]">Team</span>
-        <span className="text-white">.</span>
+      {/* Header section with responsive margins and animations */}
+      <div className="relative z-10 mb-6 sm:mb-8 md:mb-10 mt-11">
+        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl ml-[4%] sm:ml-[6%] md:ml-[8%] lg:ml-[10%]">
+          <span className="text-white underline-offset-2 inline-block cursor-pointer transition duration-300 hover:scale-110 hover:text-white hover:drop-shadow-[0_0_20px_#00ffc3] group">Meet the </span>
+          <span className="text-[#0073AE] inline-block cursor-pointer transition duration-300 hover:scale-110 hover:text-[#00ffc3] hover:drop-shadow-[0_0_20px_#0073AE] group">Team</span>
+          <span className="text-white">.</span>
+        </div>
+        <hr className="ml-[4%] sm:ml-[6%] md:ml-[8%] lg:ml-[10%] w-[25%] sm:w-[20%] md:w-[16%] lg:w-[14%] xl:w-[11%] mt-3 sm:mt-4 md:mt-5 h-1 rounded-lg border-0 bg-[#0073AE]" />
       </div>
-      <hr className="ml-[10%] w-[19%] md:w-[14%] lg:w-[16%] xl:w-[11%] mt-5 h-1 rounded-lg border-0 bg-[#0073AE]" />
-      <div className="mt-[10%] flex flex-wrap justify-center gap-7">
+
+      {/* Slider container with responsive spacing */}
+      <div className="relative z-10 mt-[8%] sm:mt-[9%] md:mt-[10%] flex flex-wrap justify-center gap-7">
         <Slider />
       </div>
     </div>
