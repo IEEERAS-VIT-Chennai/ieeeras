@@ -16,7 +16,6 @@ export default function Home() {
     <Background />
     <Navbar />
     <MorphingText />
-    <WhatweDo />
     <AboutUs />
     <Departments />
     <Members />
