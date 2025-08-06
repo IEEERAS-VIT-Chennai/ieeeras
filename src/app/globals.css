@@ -7,6 +7,7 @@ html {
     scroll-padding-top: 60px;
     background-color: rgba(0, 0, 0, 0.8); /* Adjust the last value (0.8) for transparency */
     background-attachment: fixed;
-    
 }
-
+body {
+  overflow-x: hidden;
+}
