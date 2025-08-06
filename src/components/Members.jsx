@@ -186,37 +186,46 @@ const Slider = () => {
         <div className="w-24 h-1 bg-gradient-to-r from-[#0073AE] to-[#00ffc3] mx-auto rounded-full"></div>
       </motion.div>
 
-      {/* Team Members Grid */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentTeamIndex}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className={getGridClasses(currentTeam.members.length)}
+      {/* Team Members Grid with Side Navigation */}
+      <div className="flex items-center justify-center w-full gap-4 lg:gap-8">
+        {/* Left Arrow */}
+        <button
+          onClick={() => setCurrentTeamIndex((prev) => (prev - 1 + totalTeams) % totalTeams)}
+          className="flex-shrink-0 p-3 rounded-full bg-transparent border-2 border-[#0073AE] text-white hover:border-2  transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
         >
-          {currentTeam.members.map((member) => (
-            <ImageBox key={member.id} member={member} />
-          ))}
-        </motion.div>
-      </AnimatePresence>
+          <MdChevronLeft size={18} />
+        </button>
 
-      {/* Navigation Dots */}
-      <div className="flex justify-center mt-3 gap-4 p-4">
-        {teams.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentTeamIndex(idx)}
-            className={`lg:w-3 lg:h-3 rounded-full transition-all duration-300 ${currentTeamIndex === idx
-                ? 'bg-[#0073AE] scale-110 shadow-md'
-                : 'bg-gray-500 hover:bg-[#0073AE]'
-              }`}
-          />
-        ))}
+        {/* Team Members Grid */}
+        <div className="flex-1 max-w-6xl">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentTeamIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className={getGridClasses(currentTeam.members.length)}
+            >
+              {currentTeam.members.map((member) => (
+                <ImageBox key={member.id} member={member} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => setCurrentTeamIndex((prev) => (prev + 1) % totalTeams)}
+          className="flex-shrink-0 p-3 rounded-full bg-transparent border-2 border-[#0073AE] text-white hover:border-2  transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
+        >
+          <MdChevronRight size={18} />
+        </button>
       </div>
 
       
+
+
     </div>
   );
 };

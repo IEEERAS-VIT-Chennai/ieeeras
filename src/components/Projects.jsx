@@ -8,7 +8,7 @@ const Projects = () => {
     {
       name: "Line Follower Robot",
       url: "/assets/projects/linefollower.jpg",
-      desc: "A line follower robot is an autonomous robot that follows a specific path, usually a black line on a white surface. It uses infrared sensors to detect the line and adjust its movement accordingly. The robot continuously scans the path and makes real-time decisions to stay on track. It's often used to demonstrate concepts of automation, control systems, and robotics. consectetur, adipisicing elit. Nesciunt quis quam quo! Cupiditate aliquid necessitatibus quasi voluptates repellendus molestiae mollitia magnam possimus officiis."
+      desc: "A line follower robot is an autonomous robot that follows a specific path, usually a black line on a white surface. It uses infrared sensors to detect the line and adjust its movement accordingly. The robot continuously scans the path and makes real-time decisions to stay on track. It's often used to demonstrate concepts of automation, control systems, and robotics."
     },
     {
       name: "Hospital Locator & Navigator",
