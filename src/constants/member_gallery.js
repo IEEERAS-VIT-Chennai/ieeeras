@@ -1,55 +1,113 @@
 
-export const data = [
-    {
-      id: 1,
-      img: "assets/members/derrick.jpg",
-      name: "Derrick Samuel",
-      designation: "DataScience Lead",
-      instagram:"https://www.instagram.com/littledrummerboi08/",
-      twitter:"https://twitter.com/LilDrummerBoi08",
-      linkedin:"https://www.linkedin.com/in/derrick-s-richard/",
-    },
-    {
-      id: 2,
-      img: "assets/members/rithvika.jpg",
-      name: "Rithvika",
-      designation: "Treasurer",
-    },
-    {
-      id: 3,
-      img: "assets/members/chaitanya.png",
-      name: "Chaitanya",
-      designation: "Design lead",
-    },
-    {
-      id: 4,
-      img: "assets/members/jesher.jpg",
-      name: "Jesher",
-      designation: "Chair person",
-    },
-    {
-      id: 5,
-      img: "assets/members/jyotsna.jpg",
-      name: "Jyotsna",
-      designation: "Operations lead",
-    },
-    {
-      id: 6,
-      img: "assets/members/pallav.png",
-      name: "Pallav Gupta",
-      designation: "Web-Dev Lead",
-    },
-    {
-      id: 7,
-      img: "assets/members/shiv.jpg",
-      name: "Shiv",
-      designation: "General Secretary",
-    },
-    {
-      id: 8,
-      img: "assets/members/diya.png",
-      name: "Diya",
-      designation: "Webmaster",
-    },
-    
-  ];
+export const teamData = {
+  leadership: {
+    teamName: "Core",
+    members: [
+      {
+        id: 1,
+        img: "assets/leads/derrick.jpg",
+        name: "Derrick Samuel",
+        designation: "Chairperson",
+      },
+      {
+        id: 2,
+        img: "assets/leads/dev.jpg",
+        name: "Dev Agarwal",
+        designation: "Vice Chairperson",
+      },
+      {
+        id: 3,
+        img: "assets/leads/vaibhav.jpg",
+        name: "Vaibhav",
+        designation: "General Secretary",
+      }
+    ]
+  },
+  executive: {
+    teamName: "Executive Board",
+    members: [
+      {
+        id: 11,
+        img: "assets/leads/navin.jpg", 
+        name: "Naveen",
+        designation: "Events Secretary",
+      },
+      
+      {
+        id: 13,
+        img: "assets/leads/tarun.jpg", 
+        name: "Tarun",
+        designation: "Technical Secretary (Software)",
+      },
+      {
+        id: 14,
+        img: "assets/leads/subbu.jpg",
+        name: "Subramaniam",
+        designation: "Treasurer",
+      }
+    ]
+  },
+  Tech: {
+    teamName: "Web Development",
+    members: [
+      {
+        id: 6,
+        img: "assets/leads/ashif.jpg",
+        name: "Ashif",
+        designation: "Web-Dev Lead",
+      },
+      {
+        id: 8,
+        img: "assets/leads/sharvin.jpg",
+        name: "Sharvin",
+        designation: "Web-Dev Co-Lead",
+      }
+    ]
+  },
+  datascience: {
+    teamName: "Data Science",
+    members: [
+      {
+        id: 5,
+        img: "assets/leads/dhurvank.jpg",
+        name: "Dhurvank",
+        designation: "Data Science Lead",
+      },
+
+    ]
+  },
+  operations: {
+    teamName: "Operations",
+    members: [
+      {
+        id: 5,
+        img: "assets/leads/nadia.jpeg",
+        name: "Nadia",
+        designation: "Operations Lead",
+      },
+
+    ]
+  },
+  socialmedia: {
+    teamName: "Social Media",
+    members: [
+      {
+        id: 7,
+        img: "assets/leads/sameer.jpeg",
+        name: "Sameer",
+        designation: "Social Media Lead",
+      },
+      {
+        id: 5,
+        img: "assets/leads/neha.jpg",
+        name: "Neha",
+        designation: "Social Media Co-Lead",
+      },
+
+    ]
+  }
+
+};
+
+// Keep the old data export for backward compatibility if needed
+export const data = Object.values(teamData).flatMap(team => team.members);
