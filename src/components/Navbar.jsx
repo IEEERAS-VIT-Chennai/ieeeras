@@ -21,10 +21,9 @@ const Navbar = ({ onOpenMobileMenu, activeSection }) => {
     { label: "Home", icon: <Home size={18} />, onClick: () => scrollToSection("home") },
     { label: "About Us", icon: <Users size={18} />, onClick: () => scrollToSection("about") },
     { label: "Department", icon: <Briefcase size={18} />, onClick: () => scrollToSection("department") },
-    { label: "Events", icon: <Calendar size={18} />, onClick: () => scrollToSection("events") },
     { label: "Members", icon: <Layers size={18} />, onClick: () => scrollToSection("members") },
     { label: "Projects", icon: <Folder size={18} />, onClick: () => scrollToSection("projects") },
-    { label: "Join Us", icon: <MoveRight size={18} />, onClick: () => scrollToSection("contact") },
+    { label: "Join Us", icon: <MoveRight size={18} />, onClick: () => window.open("https://linktr.ee/IEEERAS_VITC", "_blank") },
   ]
 
   // Effect to add/remove scroll listener for dynamic navbar styling
@@ -74,9 +73,8 @@ const Navbar = ({ onOpenMobileMenu, activeSection }) => {
               className={`relative py-2 px-1 transition-all duration-300 hover:font-semibold ${
                 // Active text color: blue-500 always, font-bold
                 activeSection === item.label ? "font-bold text-blue-500" : ""
-              } ${
-                isScrolled ? "text-gray-700" : "text-gray-700"
-              }`}
+                } ${isScrolled ? "text-gray-700" : "text-gray-700"
+                }`}
             >
               {item.label}
               {/* Underline animation on hover and active */}
@@ -84,7 +82,7 @@ const Navbar = ({ onOpenMobileMenu, activeSection }) => {
                 className={`absolute bottom-0 left-0 h-0.5 ${
                   // Underline color: blue-400 when scrolled, violet-500 when not scrolled
                   isScrolled ? "bg-violet-500" : "bg-violet-500"
-                }`}
+                  }`}
                 initial={{ width: 0 }}
                 // Animate to 100% width if active, otherwise 0%
                 animate={{ width: activeSection === item.label ? "100%" : "0%" }}
