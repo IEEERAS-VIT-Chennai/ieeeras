@@ -42,7 +42,7 @@ const Navbar = ({ onOpenMobileMenu, activeSection }) => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         // Navbar always maintains the same size and white background
         className={`hidden lg:flex fixed top-4 left-1/2 transform -translate-x-1/2 z-40 h-16 px-6 xl:px-8 items-center justify-between font-medium transition-all duration-500 ease-out
-          bg-white/95 backdrop-blur-sm shadow-lg rounded-2xl border border-gray-200/50 w-[95%] max-w-7xl`}
+          bg-white/90 backdrop-blur-sm shadow-lg rounded-2xl border border-gray-200/50 w-[95%] max-w-7xl`}
       >
         {/* Logo - IEEE-RAS */}
         <motion.div
