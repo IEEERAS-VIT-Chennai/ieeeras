@@ -122,7 +122,7 @@ const Slider = () => {
     if (isHovered) return;
     const interval = setInterval(() => {
       setCurrentTeamIndex((prevIndex) => (prevIndex + 1) % totalTeams);
-    }, 4000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [isHovered, totalTeams]);
 

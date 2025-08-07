@@ -70,9 +70,15 @@ export const teamData = {
       {
         id: 5,
         img: "assets/leads/dhurvank.jpg",
-        name: "Dhurvank",
+        name: "Durvank",
         designation: "Data Science Lead",
       },
+      {
+        id: 15,
+        img: "assets/leads/nikhil.jpg",
+        name: "Nikhil",
+        designation: "Data Science Co-Lead"
+      }
 
     ]
   },
@@ -85,7 +91,24 @@ export const teamData = {
         name: "Nadia",
         designation: "Operations Lead",
       },
+      {
+        id: 16,
+        img: "assets/leads/kaushik.jpg",
+        name:"Kaushik",
+        designation:"Operations Co-Lead"
+      }
 
+    ]
+  },
+  design:{
+    teamName:"Design",
+    members:[
+      {
+        id:17,
+        img:"assets/leads/sudarsan.jpg",
+        name:"Sudarsan",
+        designation:"Design Lead"
+      }
     ]
   },
   socialmedia: {
