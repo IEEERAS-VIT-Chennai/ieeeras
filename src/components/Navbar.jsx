@@ -46,13 +46,15 @@ const Navbar = ({ onOpenMobileMenu, activeSection }) => {
       >
         {/* Logo - IEEE-RAS */}
         <motion.div
-          className="text-2xl font-bold cursor-pointer select-none"
+          className="text-2xl font-bold cursor-pointer select-none flex items-center justify-center gap-2"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
           onClick={() => scrollToSection("home")}
         >
+          <img src={"assets/raslogo.png"} className="h-7"></img>
           IEEE<span className="text-violet-500">-</span>
           <span className="text-red-500">RAS</span>
+          
         </motion.div>
 
         {/* Navigation Links for desktop */}
@@ -121,11 +123,13 @@ const Navbar = ({ onOpenMobileMenu, activeSection }) => {
       >
         {/* Mobile Logo */}
         <motion.div
-          className="text-lg sm:text-xl font-bold text-white cursor-pointer select-none"
+          className="text-lg sm:text-xl font-bold text-white cursor-pointer select-none flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
           onClick={() => scrollToSection("home")}
         >
+         <img src={"assets/raslogo.png"} className="h-6"></img>
+
           IEEE<span className="text-violet-500">-</span>
           <span className="text-red-500">RAS</span>
         </motion.div>

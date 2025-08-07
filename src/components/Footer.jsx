@@ -5,10 +5,8 @@ const Footer = () => {
     <footer className="text-gray-600 py-8 md:py-20 body-font flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-[10%]">
       <div className="flex flex-col md:flex-row items-center">
         <a href="#" className="flex items-center text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-indigo-500 p-2 bg-white rounded-full" viewBox="0 0 24 24">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <span className="ml-2 text-xl font-bold">IEEE</span>
+          <img src={"assets/raslogo.png"} className="h-12"></img>
+
         </a>
         <p className="text-sm text-gray-300 mt-4 md:mt-0 md:ml-4 md:text-left">The IEEE Robotics <br />& Automation Society (RAS) <br />VITC Student Chapter</p>
       </div>
