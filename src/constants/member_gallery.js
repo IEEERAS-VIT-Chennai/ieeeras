@@ -28,14 +28,14 @@ export const teamData = {
     members: [
       {
         id: 11,
-        img: "assets/leads/navin.jpg", 
+        img: "assets/leads/navin.jpg",
         name: "Naveen",
         designation: "Events Secretary",
       },
-      
+
       {
         id: 13,
-        img: "assets/leads/tarun.jpg", 
+        img: "assets/leads/tarun.jpg",
         name: "Tarun",
         designation: "Technical Secretary (Software)",
       },
@@ -94,20 +94,40 @@ export const teamData = {
       {
         id: 16,
         img: "assets/leads/kaushik.jpg",
-        name:"Kaushik",
-        designation:"Operations Co-Lead"
+        name: "Kaushik",
+        designation: "Operations Co-Lead"
       }
 
     ]
   },
-  design:{
-    teamName:"Design",
-    members:[
+  projects: {
+    teamName: "Projects",
+    members: [
+
       {
-        id:17,
-        img:"assets/leads/sudarsan.jpg",
-        name:"Sudarsan",
-        designation:"Design Lead"
+        id: 16,
+        img: "assets/leads/astley.jpg",
+        name: "Astley",
+        designation: "Projects Lead"
+      }
+
+    ]
+  },
+  design: {
+    teamName: "Design",
+    members: [
+      {
+        id: 18,
+        img: "assets/leads/ananya.jpg",
+        name: "Ananya",
+        designation: "Design Lead"
+      },
+
+      {
+        id: 17,
+        img: "assets/leads/sudarsan.jpg",
+        name: "Sudarsan",
+        designation: "Design Co-Lead"
       }
     ]
   },
